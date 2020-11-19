@@ -192,35 +192,54 @@ export default class ModalDropdown extends Component {
   }
 
   _renderButton() {
-    const {
-      disabled,
-      accessible,
-      children,
-      textStyle,
-      renderButtonComponent,
-      renderButtonProps,
-    } = this.props;
-    const ButtonTouchable = renderButtonComponent;
-    const { buttonText } = this.state;
+  const {
+    disabled,
+    accessible,
+    children,
+    textStyle,
+    renderButtonComponent,
+    renderButtonProps,
+    renderButtonText
+  } = this.props;
+  const ButtonTouchable = renderButtonComponent;
+  const { buttonText } = this.state;
 
+  if (renderButtonText && typeof buttonText !== 'string') {
     return (
       <ButtonTouchable
-        ref={button => (this._button = button)}
-        disabled={disabled}
-        accessible={accessible}
-        onPress={this._onButtonPress}
-        {...renderButtonProps}
-      >
-        {children || (
-          <View style={styles.button}>
-            <Text style={[styles.buttonText, textStyle]} numberOfLines={1}>
-              {buttonText}
-            </Text>
-          </View>
-        )}
-      </ButtonTouchable>
-    );
+      ref={button => (this._button = button)}
+      disabled={disabled}
+      accessible={accessible}
+      onPress={this._onButtonPress}
+      {...renderButtonProps}
+    >
+      {children || (
+        <View style={[styles.button, { flex: 1 }]}>
+          {buttonText}
+        </View>
+      )}
+    </ButtonTouchable>
+    )
   }
+
+  return (
+    <ButtonTouchable
+      ref={button => (this._button = button)}
+      disabled={disabled}
+      accessible={accessible}
+      onPress={this._onButtonPress}
+      {...renderButtonProps}
+    >
+      {children || (
+        <View style={styles.button}>
+          <Text style={[styles.buttonText, textStyle]} numberOfLines={1}>
+            {buttonText}
+          </Text>
+        </View>
+      )}
+    </ButtonTouchable>
+  );
+}
 
   _onButtonPress = () => {
     const { onDropdownWillShow } = this.props;
