@@ -88,7 +88,7 @@ export default class ModalDropdown extends Component {
     animated: true,
     showsVerticalScrollIndicator: true,
     keyboardShouldPersistTaps: 'never',
-    renderRowComponent: Platform.OS === 'ios' ? TouchableOpacity : TouchableHighlight,
+    renderRowComponent: TouchableOpacity,
     renderButtonComponent: TouchableOpacity,
   };
 
