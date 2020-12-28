@@ -208,6 +208,7 @@ export default class ModalDropdown extends Component {
     return (
       <ButtonTouchable
       ref={button => (this._button = button)}
+      style={{ flex: 1}}
       disabled={disabled}
       accessible={accessible}
       onPress={this._onButtonPress}
